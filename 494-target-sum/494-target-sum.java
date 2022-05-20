@@ -1,20 +1,22 @@
 class Solution {
-    public int findTargetSumWays(int[] nums, int s) {
-        int sum = 0; 
-        for(int i: nums) sum+=i;
-        if(s>sum || s<-sum) return 0;
-        int[] dp = new int[2*sum+1];
-        dp[0+sum] = 1;
-        for(int i = 0; i<nums.length; i++){
-            int[] next = new int[2*sum+1];
-            for(int k = 0; k<2*sum+1; k++){
-                if(dp[k]!=0){
-                    next[k + nums[i]] += dp[k];
-                    next[k - nums[i]] += dp[k];
-                }
-            }
-            dp = next;
+    public int findTargetSumWays(int[] nums, int target) {
+        int sum = 0;
+        int N = nums.length;
+        for(int i : nums)
+             sum+=i;
+        int[][] dp = new int[25][2010];
+        for(int[] arr : dp) 
+            Arrays.fill(arr,-1);
+        return findcount(0,0,nums,target,dp);
+    }
+    private static int findcount(int index, int sum ,int[] nums, int target, int[][] dp){
+        if(index == nums.length){
+            if(sum == target) return 1;
+            else return 0;
         }
-        return dp[sum+s];
+        if(dp[index][1000+sum] != -1) return dp[index][1000+sum];
+        
+        dp[index][1000+sum] = (findcount(index +1, sum + nums[index],nums,target,dp)+findcount(index+1,sum - nums[index],nums,target,dp));
+        return dp[index][1000+sum];
     }
 }
