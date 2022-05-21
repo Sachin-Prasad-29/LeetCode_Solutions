@@ -55,27 +55,58 @@ class Solution{
 
 
 // Recursive + Memization approach
-static int knapSack(int N, int W, int val[], int wt[])
-    {
-        // code here
-        int[][] dp = new int[1001][1001];
-        // filling the dp array with -1 value
-        for(int[] d : dp)
-            Arrays.fill(d,-1);
-        return findMaxProfit(N,W,val,wt,dp);
-    }
-    private static int findMaxProfit(int index, int W, int[] val, int[] wt,int[][] dp){
-        // base condition
-        if(index == 0 || W == 0)
-            return 0;
-        if(dp[index][W] != -1) return dp[index][W];
-        if(wt[index-1] <= W){
-            dp[index][W]= Math.max(val[index-1] + findMaxProfit(index,W-wt[index-1], val, wt,dp), findMaxProfit(index-1, W, val, wt,dp));
-            return dp[index][W];
-        }
-        else{
-            dp[index][W] = findMaxProfit(index -1, W, val, wt,dp);
-            return dp[index][W];
-        }
-    }
+// static int knapSack(int N, int W, int val[], int wt[])
+//     {
+//         // code here
+//         int[][] dp = new int[1001][1001];
+//         // filling the dp array with -1 value
+//         for(int[] d : dp)
+//             Arrays.fill(d,-1);
+//         return findMaxProfit(N,W,val,wt,dp);
+//     }
+//     private static int findMaxProfit(int index, int W, int[] val, int[] wt,int[][] dp){
+//         // base condition
+//         if(index == 0 || W == 0)
+//             return 0;
+//         if(dp[index][W] != -1) return dp[index][W];
+//         if(wt[index-1] <= W){
+//             dp[index][W]= Math.max(val[index-1] + findMaxProfit(index,W-wt[index-1], val, wt,dp), findMaxProfit(index-1, W, val, wt,dp));
+//             return dp[index][W];
+//         }
+//         else{
+//             dp[index][W] = findMaxProfit(index -1, W, val, wt,dp);
+//             return dp[index][W];
+//         }
+//     }
+// }
+
+// Tabulation  ( Buttom up approach)
+   static int knapSack(int N, int W, int val[], int wt[]){
+    
+         int[][] dp = new int[N+1][W+1];
+         // Initialization first row and first should be Zero int the matrix  but not needed int the Java as its alredy Zero 
+    
+         return findMaxProfit(N,W,val,wt,dp);
+  }
+   private static int findMaxProfit(int N, int W, int[] val, int[] wt,int[][] dp){
+       for(int i =1; i < N+1; i++){
+           for(int j = 1; j < W+1; j++){
+               if(wt[i-1] <= j){
+                   dp[i][j] = Math.max(val[i-1]+dp[i][j-wt[i-1]] , dp[i-1][j]);
+               }
+               else
+                    dp[i][j] = dp[i-1][j];
+           }
+       }
+       
+       return dp[N][W];
+   }
+
 }
+
+
+
+
+
+
+
