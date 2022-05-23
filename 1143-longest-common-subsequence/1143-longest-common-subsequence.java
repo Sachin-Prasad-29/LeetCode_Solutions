@@ -17,38 +17,19 @@ class Solution {
 //             return t[M][N];
 //         }
 //         else {
-//            t[M][N] = Math.max(LCS_helper(s1,s2,M-1,N,t), LCS_helper(s1,s2,M,N-1,t));
-//            return t[M][N];
-//         }
-            
-//     }
-    
-    // Second Approach Buttom up (Tabulation Approach)
-    public int longestCommonSubsequence(String text1, String text2) {
-        int M = text1.length();
-        int N = text2.length();
-        
-        int[][] t = new int[M+1][N+1];
-        // filling the whole matric with the -1 value
-         for(int[] d : t)
-             Arrays.fill(d,-1);
-        
-        // Initialization 
-        for(int i = 0 ; i< M+1; i++)
-            t[i][0] = 0;
-        for(int i = 0; i< N+1; i++)
-            t[0][i] = 0;
-        
-        for(int i = 1 ; i < M+1; i++)
-            for(int j = 1; j < N+1; j++){
-                if(text1.charAt(i-1) == text2.charAt(j-1)){
-                    t[i][j] = t[i-1][j-1]+1;
-                }
-                else{
-                    t[i][j] = Math.max(t[i][j-1],t[i-1][j]);
-                }
+ public int longestCommonSubsequence(String text1, String text2) {
+        int m = text1.length(), n = text2.length();
+        if (m < n) {
+            return longestCommonSubsequence(text2, text1);
+        }
+        int[] dp = new int[n + 1];
+        for (int i = 0; i < text1.length(); ++i) {
+            for (int j = 0, prevRow = 0, prevRowPrevCol = 0; j < text2.length(); ++j) {
+                prevRowPrevCol = prevRow;
+                prevRow = dp[j + 1];
+                dp[j + 1] = text1.charAt(i) == text2.charAt(j) ? prevRowPrevCol + 1 : Math.max(dp[j], prevRow);
             }
-        
-        return t[M][N];
+        }
+        return dp[n];
     }
 }
