@@ -1,6 +1,6 @@
 class Solution {
     public boolean hasAllCodes(String s, int k) {
-        int N = s.length();
+        
         // Storing the maximum possible combination with k digit 
         int combi = (int)Math.pow(2,k);
         
@@ -9,9 +9,7 @@ class Solution {
         
         HashSet<String> set = new HashSet<>();
         
-        while(end <  N){
-            // untill we reach the window size of k increase the end value only
-            // if size of the window is equal to the k 
+        while(end <  s.length()){
                  String temp = s.substring(start,end+1);
                 // insert the substring of size k in the set 
                 set.add(temp);
