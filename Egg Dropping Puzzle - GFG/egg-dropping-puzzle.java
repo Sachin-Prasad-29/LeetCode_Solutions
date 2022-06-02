@@ -32,19 +32,19 @@ class GfG {
 
 
 class Solution 
-{    
+{    static int[][] dp ;
      
     //Function to find minimum number of attempts needed in 
     //order to find the critical floor.
     static int eggDrop(int n, int k) 
 	{
-	    int[][] dp = new int[n+2][k+2];
+	    dp = new int[n+2][k+2];
 	    for(int[] d: dp)
 	        Arrays.fill(d,-1);
-	    return helper(n,k,dp);
+	    return helper(n,k);
 	    
 	}
-	private static int helper(int n, int k,int[][] dp){
+	private static int helper(int n, int k){
 	    if( k == 1 || k == 0) return k;
 	    if(n == 1) return k;
 	    if(dp[n][k] != -1) return dp[n][k];
@@ -57,7 +57,7 @@ class Solution
 	            case1 = dp[n-1][i-1];
 	        }
 	        else{
-	            dp[n-1][i-1] = helper(n-1,i-1,dp);
+	            dp[n-1][i-1] = helper(n-1,i-1);
 	            case1 = dp[n-1][i-1];
 	        }
 	        
@@ -65,7 +65,7 @@ class Solution
 	            case2 = dp[n][k-i];
 	        }
 	        else{
-	           dp[n][k-i] = helper(n,k-i,dp);
+	           dp[n][k-i] = helper(n,k-i);
 	            case2 = dp[n][k-i];
 	        }
 	        
