@@ -24,20 +24,12 @@ class Solution {
         boolean flag = false;
         for(int i = 1; i< N; i++){
             // condition 1 we will take for the string when there is a swapping 
-            String P = A.substring(0,i);
-            String Q = B.substring(N-i,N);
-            String R = A.substring(i,N);
-            String S = B.substring(0,N-i);
-            boolean condition1 =  (helper(P,Q)) && (helper(R,S));
+            boolean condition1 =  (helper(A.substring(0,i),B.substring(N-i,N))) && (helper(A.substring(i,N),B.substring(0,N-i)));
            
             boolean condition2 = false;
             // condition 2 we will take when the there is no swapping in string
             if(condition1 == false){
-                String X = A.substring(0,i);
-                String Y = B.substring(0,i);
-                String Z = A.substring(i,N);
-                String W = B.substring(i,N);
-                condition2 = (helper(X,Y)) && (helper(Z,W));
+                condition2 = (helper(A.substring(0,i),B.substring(0,i))) && (helper(A.substring(i,N),B.substring(i,N)));
                 
             }
             if( condition1 || condition2 ){
