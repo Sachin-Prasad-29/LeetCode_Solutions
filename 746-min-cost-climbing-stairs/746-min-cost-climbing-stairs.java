@@ -30,15 +30,27 @@ class Solution {
 //     }
     
     // Buttom up Appraoch 
-    public int minCostClimbingStairs(int[] cost){
+    // public int minCostClimbingStairs(int[] cost){
+    //         int N = cost.length;
+    //         int[] dp = new int[N+1];
+    //         dp[0] = cost[0];
+    //         dp[1] = cost[1];
+    //         for(int i = 2 ; i < N; i++){
+    //             dp[i] = Math.min(dp[i-1],dp[i-2])+cost[i];
+    //         }
+    //     return Math.min(dp[N-1],dp[N-2]);
+    // }
+    
+     public int minCostClimbingStairs(int[] cost){
             int N = cost.length;
-            int[] dp = new int[N+1];
-            dp[0] = cost[0];
-            dp[1] = cost[1];
+            int prev1 = cost[0];
+            int prev2 = cost[1];
             for(int i = 2 ; i < N; i++){
-                dp[i] = Math.min(dp[i-1],dp[i-2])+cost[i];
+                int curr = Math.min(prev1,prev2)+cost[i];
+                prev1 = prev2;
+                prev2 = curr;
             }
-        return Math.min(dp[N-1],dp[N-2]);
+        return Math.min(prev1,prev2);
     }
 }
 
