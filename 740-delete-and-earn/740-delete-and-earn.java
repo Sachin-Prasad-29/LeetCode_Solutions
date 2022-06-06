@@ -6,7 +6,7 @@ class Solution {
         for( int i = 0 ; i < n ; i++){
             max = Math.max(max,nums[i]);
         }
-        System.out.println(max);
+        //System.out.println(max);
         int[] sum = new int[max+1];
         for(int i = 0 ; i < n ;i++){
                 sum[nums[i]] +=nums[i];
