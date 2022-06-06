@@ -37,11 +37,11 @@ class Solution {
         for(int i = 0 ; i < n ;i++){
                 sum[nums[i]] +=nums[i];
         }
-        int[] dp = new int[sum.length];
+        int[] dp = new int[max+1];
          dp[0] = 0;
          dp[1] = sum[1];
          dp[2] = sum[2];
-         for(int i = 3; i < sum.length;i++){
+         for(int i = 3; i < max+1;i++){
             dp[i] = sum[i] + Math.max(dp[i-2],dp[i-3]);
          }
          return Math.max(dp[dp.length-2],dp[dp.length-1]);
