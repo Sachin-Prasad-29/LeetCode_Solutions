@@ -2,21 +2,21 @@ class Solution {
     static int[] dp;
     public int deleteAndEarn(int[] nums) {
         int n = nums.length;
-        int max = nums[0];
-        for( int i = 0 ; i < n ; i++){
-            max = Math.max(max,nums[i]);
-        }
-        System.out.println(max);
-        int[] sum = new int[max+1];
+        // int max = nums[0];
+        // for( int i = 0 ; i < n ; i++){
+        //     max = Math.max(max,nums[i]);
+        // }
+        //System.out.println(max);
+        int[] sum = new int[10001];
         for(int i = 0 ; i < n ;i++){
                 sum[nums[i]] +=nums[i];
         }
-        dp = new int[sum.length+1];
+        dp = new int[10002];
         Arrays.fill(dp,-1);
         System.out.println(Arrays.toString(sum));
         
         
-        return Math.max(helper(sum,max),helper(sum,max-1));
+        return Math.max(helper(sum,10000),helper(sum,9999));
     }
     private static int helper(int[] sum,int n){
         if(n<=0) return 0;
