@@ -13,7 +13,7 @@ class Solution {
         }
         dp = new int[10002];
         Arrays.fill(dp,-1);
-        System.out.println(Arrays.toString(sum));
+       // System.out.println(Arrays.toString(sum));
         
         
         return Math.max(helper(sum,10000),helper(sum,9999));
