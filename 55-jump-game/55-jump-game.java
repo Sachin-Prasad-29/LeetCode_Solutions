@@ -1,12 +1,22 @@
 class Solution {
      public boolean canJump(int[] nums) {
-         int goal = nums.length-1;
-         for(int i = nums.length-2; i >= 0; i--){
-            if(nums[i]+ i  >= goal) goal = i;
+         int reachable = 0;
+         for(int i = 0 ; i < nums.length; i++){
+             if(i > reachable ) return false;
+             reachable= Math.max(reachable, nums[i]+i);
          }
-         return goal == 0;
+         return true;
      }
 }
+
+//      public boolean canJump(int[] nums) {
+//          int goal = nums.length-1;
+//          for(int i = nums.length-2; i >= 0; i--){
+//             if(nums[i]+ i  >= goal) goal = i;
+//          }
+//          return goal == 0;
+//      }
+// }
 //     static int[] dp;
 //     public boolean canJump(int[] nums) {
 //         dp = new int[nums.length];
