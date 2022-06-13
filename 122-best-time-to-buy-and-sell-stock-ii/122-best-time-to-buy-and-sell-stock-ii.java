@@ -3,20 +3,25 @@ class Solution {
         int[][] dp = new int[a.length+1][2];
         dp[a.length][0] = 0;
         dp[a.length][1] = 0;
+        int prev1 = 0;
+        int prev2 = 0;
         
         
         
         for(int i = a.length-1; i >= 0 ; i--){
+            int temp1 = 0 ; 
+            int temp2 = 0;
             for(int j = 1; j >= 0; j--){
-                
-                if(j == 1){
-                    dp[i][j] = Math.max(-a[i] + dp[i+1][0],dp[i+1][1]);
+               if(j == 1){
+                   temp1 = Math.max(-a[i] + prev1 ,prev2);
                 }else{
-                    dp[i][j] = Math.max(a[i] + dp[i+1][1] ,dp[i+1][0]);                   
+                    temp2 = Math.max(a[i] + prev2 ,prev1);                   
                 }
             }
+            prev2 = temp1;
+            prev1 = temp2;
         }
-        return dp[0][1];
+        return prev2;
     }
     
     
