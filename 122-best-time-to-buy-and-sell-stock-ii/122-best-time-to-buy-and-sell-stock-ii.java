@@ -1,5 +1,26 @@
 class Solution {
-     public int maxProfit(int[] a) {
+    public int maxProfit(int[] a) {
+        int[][] dp = new int[a.length+1][2];
+        dp[a.length][0] = 0;
+        dp[a.length][1] = 0;
+        
+        
+        
+        for(int i = a.length-1; i >= 0 ; i--){
+            for(int j = 1; j >= 0; j--){
+                
+                if(j == 1){
+                    dp[i][j] = Math.max(-a[i] + dp[i+1][0],dp[i+1][1]);
+                }else{
+                    dp[i][j] = Math.max(a[i] + dp[i+1][1] ,dp[i+1][0]);                   
+                }
+            }
+        }
+        return dp[0][1];
+    }
+    
+    
+     public int max1Profit(int[] a) {
          int[][] dp = new int[a.length][2];
          for(int[] d : dp)
              Arrays.fill(d,-1);
