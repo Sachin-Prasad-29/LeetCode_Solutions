@@ -3,25 +3,25 @@ class Solution {
         int[][] dp = new int[a.length+1][2];
         dp[a.length][0] = 0;
         dp[a.length][1] = 0;
-        int prev1 = 0;
-        int prev2 = 0;
+        int aheadNotBuy = 0;
+        int aheadBuy = 0;
         
         
         
         for(int i = a.length-1; i >= 0 ; i--){
-            int temp1 = 0 ; 
-            int temp2 = 0;
+            int currNotBuy = 0 ; 
+            int currBuy = 0;
             for(int j = 1; j >= 0; j--){
                if(j == 1){
-                   temp1 = Math.max(-a[i] + prev1 ,prev2);
+                   currBuy = Math.max(-a[i] + aheadNotBuy ,aheadBuy);
                 }else{
-                    temp2 = Math.max(a[i] + prev2 ,prev1);                   
+                    currNotBuy = Math.max(a[i] + aheadBuy ,aheadNotBuy);                   
                 }
             }
-            prev2 = temp1;
-            prev1 = temp2;
+            aheadBuy = currBuy;
+            aheadNotBuy = currNotBuy;
         }
-        return prev2;
+        return aheadBuy;
     }
     
     
