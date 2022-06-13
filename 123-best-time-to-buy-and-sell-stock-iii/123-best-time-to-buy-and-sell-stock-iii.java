@@ -1,5 +1,29 @@
 class Solution {
     public int maxProfit(int[] a) {
+        int n = a.length;
+        int[][][] dp = new int[n+1][2][3]; // [size][canBuy][cap];
+        // initialization
+        for(int ind = n-1; ind >= 0 ; ind--){
+            for(int canBuy = 0 ; canBuy < 2; canBuy++){
+                for(int cap = 1 ; cap < 3; cap++){
+                    int profit = 0;
+                    if(canBuy == 1){
+                        // if we have allowed to buy the stock we can either buy this day or not buy
+                        profit = Math.max(-a[ind] + dp[ind+1][0][cap],dp[ind+1][1][cap]);
+                    }
+                    else{
+                        profit = Math.max(a[ind] + dp[ind+1][1][cap-1],dp[ind+1][0][cap]);
+                    }
+                    dp[ind][canBuy][cap] =profit;
+              }
+            }
+        }
+        return dp[0][1][2];
+    }  
+    
+    
+    
+    public int maxProfhit(int[] a) {
          int[][][] dp = new int[a.length][2][3];
          for(int[][] d : dp)
              for(int[] t: d)
