@@ -1,4 +1,5 @@
 class Solution {
+    // memoization approach
 //     static int[] dp;
 //     public int rob(int[] nums) {
 //         int n = nums.length;
@@ -14,6 +15,7 @@ class Solution {
 //         return dp[n]=ans;
 //     }
 // }
+    // buttom up appraoch
 public int rob(int[] nums){
         int n = nums.length;
         if(n == 1) return nums[0];
