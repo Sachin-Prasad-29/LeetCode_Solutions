@@ -1,4 +1,5 @@
 class Solution {
+    //space optimization for the buttom up approach
      public int minimumTotal(List<List<Integer>> triangle) {
         int m = triangle.size();
         int[] dp = new int[m];
@@ -21,7 +22,7 @@ class Solution {
          return dp[0];
         
     }
-    
+    // buttom up appraoch 
     public int minivmumTotal(List<List<Integer>> triangle) {
         int m = triangle.size();
         int[][] dp = new int[m][m];
@@ -45,7 +46,7 @@ class Solution {
     
     
     
-    
+    // Recurction + moization
     public int minimugfgmTotal(List<List<Integer>> triangle) {
         int m = triangle.size();
         int[][] dp = new int[m][m];
