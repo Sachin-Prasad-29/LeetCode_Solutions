@@ -1,43 +1,27 @@
 class Node{
-    Node[] links = new Node[26];
+    Node[] link = new Node[26];
     boolean flag = false;
     
-    public Node(){}
-    
-    // it will return true is the node contain the following key
     boolean containsKey(char ch){
-        return (links[ch-'a'] != null);
+        return (link[ch-'a'] != null);
     }
-    
-    // it will return the current link Node for the asked char
     Node get(char ch){
-        return links[ch-'a'];
+        return link[ch-'a'];
     }
-    
-    // this method taked the new null node and link it to the link node with respect to the asked char
     void put(char ch, Node node){
-        links[ch-'a'] = node;
+        link[ch-'a'] = node; // node is newly creates node for the key ch which is empty and contain flag false;
     }
-    
-    // At last during the insertion process when char finished the we set the last node flag as true 
-    void setEndTrue(){
+    void setEnd(){
         flag = true;
     }
-    
-    // it will check whether the flag value of the node is true or false 
     boolean isEnd(){
         return flag;
     }
-    
 }
-
-
-
 class Trie {
-    private static Node root; // creating the root Node for all starting alphabets
-    
+    private static Node root; // this is the first node  which contain 26 size link and flag value false;
     public Trie() {
-      root = new Node(); // actual creation of the object  
+        root = new Node(); // actaul createion of the object
     }
     
     public void insert(String word) {
@@ -48,32 +32,32 @@ class Trie {
             }
             node = node.get(word.charAt(i));
         }
-        node.setEndTrue();
+        node.setEnd();
     }
-    
     
     public boolean search(String word) {
         Node node = root;
-        for(int i = 0 ; i < word.length(); i++){
+        for(int i = 0  ; i < word.length(); i++){
             if(!node.containsKey(word.charAt(i))){
-                 return false;
+                return false;
             }
             node = node.get(word.charAt(i));
         }
-        if(node.isEnd()) 
-            return true;
-        return false;  
+        if(node.isEnd()) return true;
+        return false;
     }
     
     public boolean startsWith(String prefix) {
         Node node = root ;
-        for(int i = 0 ; i < prefix.length();i++){
-            if(!node.containsKey(prefix.charAt(i)))
+        for(int i = 0 ; i < prefix.length(); i++){
+            if(!node.containsKey(prefix.charAt(i))){
                 return false;
+            }
             node = node.get(prefix.charAt(i));
         }
         return true;
     }
+    
 }
 
 /**
