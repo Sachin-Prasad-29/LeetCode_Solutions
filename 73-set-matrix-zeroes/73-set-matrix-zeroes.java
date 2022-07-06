@@ -1,25 +1,37 @@
 class Solution {
     public void setZeroes(int[][] matrix) {
-        int m = matrix.length;
-        int n = matrix[0].length;
+        // with O(m+n) space
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int[] row = new int[n];
+        int[] col = new int[m];
         
-        int[][] dummy = new int[m][n];
-        for(int i=0;i < m;i++){
-            for(int j = 0 ; j < n;j++){
-              dummy[i][j] = matrix[i][j];
+        for(int i = 0 ; i < n; i++)
+            for( int j = 0 ; j < m ; j++){
+                if(matrix[i][j] == 0){
+                    row[i] = 1;
+                    col[j] = 1;
+                }
             }
-        }
         
-        for(int i = 0 ; i < m; i++){
-            for(int j = 0 ; j < n; j++){
-                if(dummy[i][j] == 0){
-                    for(int k = 0; k < m; k++)
-                        matrix[k][j] = 0;
-                    for(int k = 0; k < n; k++)
-                        matrix[i][k] =0;
+        
+        System.out.println(Arrays.toString(row));
+        System.out.println(Arrays.toString(col));
+        
+        for(int i = 0 ; i < n ;i++){
+            if(row[i] ==1){
+                for(int j = 0 ; j < m; j++){
+                    matrix[i][j] = 0;
                 }
             }
         }
         
+        for(int j = 0 ; j < m ;j++){
+            if(col[j] ==1){
+                for(int i = 0 ; i < n; i++){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
     }
 }
