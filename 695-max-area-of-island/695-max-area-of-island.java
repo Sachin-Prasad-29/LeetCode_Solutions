@@ -14,7 +14,7 @@ class Solution {
         return max_Area;
     }
     private static int dfs(int[][] grid,int i , int j){
-        if( i <0 || i > grid.length-1 || j < 0 || j > grid[0].length-1)
+        if( i < 0 || i > grid.length-1 || j < 0 || j > grid[0].length-1)
             return 0;
         int area = 0;
         if(grid[i][j] == 1){
